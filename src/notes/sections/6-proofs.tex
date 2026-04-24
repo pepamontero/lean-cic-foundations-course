@@ -1,0 +1,52 @@
+\section{Curry--Howard: proofs are terms}
+
+What is Curry Howard? A bit of history. What problem is it solving? How does it work? Why does it work?
+
+What does it mean for a term to be the same as a proof and a proposition to be the same as a type? Why can we "understand proofs as terms that inhabit the type of the thing we are proving"? Why does that work?
+
+\subsection{Proving things}
+
+Ok so proving something is constructing a term. How do you even "construct a term"? Well remember the construction rules that we had at chapter 1.
+
+Some bridge here im not really seeing. Like at this point i should have some tool box that allows me to build very simple proofs.
+
+Begin some examples about proving things in term mode.
+
+For example
+
+prove P -> P 
+
+
+So what we want to do is construct a term of type P -> P. It is simple, we can construct t with what we know.
+
+Notice that if t is to have type P -> P, then we understand t as "a function from type P to type P", i.e., a function that takes elements from the type P and produces elements from the type P. An element from the type P is actually a proof of P as we saw. So from an arbitrary term of type P, say p : P, we need to construct a term of type P. Well, p is already of type P so simply return p.
+
+I.e. we want to construct the function
+
+$$
+\begin{array}{ccrcl}
+  t & : & P  &\longrightarrow  & P \\
+  & & p & \longmapsto & p
+\end{array}
+$$
+
+What is this function in lambda terms? It is simply $\lambda p : P . p$.
+
+More examples.
+
+\subsubsection{First order logic}
+
+Deduction rules for first order logic. This belongs here somehow but I am unsure how. 
+
+Like curry howard also defines a way to turn NJ trees into lambda terms no?
+
+So this way we could examples like for example A and B <-> B and A
+
+\subsubsection{Exercises}
+
+\subsection{Proving more difficult things}
+
+Tactic mode, the elaborator. Understanding that a proof is a set of steps i.e. a proof tree.
+
+\subsubsection{Exercises}
+
