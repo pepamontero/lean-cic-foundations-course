@@ -1,15 +1,39 @@
 \section{Introduction}
 
-What is Lean?
+First we can ask: what is a good proof? Depends on the context. A good proof in an exam is a proof that convinces your teacher. A good proof in a paper is a proof that convinces the reviewer. There is some inherent subjectivity in that. Is there a way that veridity of proofs could be non-subjective?
 
-Why do I care?
+One idea for this is: can I give a proof to a computer and it tell me if this proof is ok? Yes, but you have to have a way to tell the computer what your proof is.
 
-Relate Lean to computation. We need that a computer understands math. How do we do this? What is the language of mathematics that is closest to computers?
+How can we do this? How can a computer understand math? and proofs? Well, we need a language for this. What is a language we can use to write mathematics so that a computer can understand?
 
-Why is the answer CIC? What is CIC? 
+The language we are used to to write mathematics is the Zermelo-Fraenkel axioms with the axiom of choice.
 
-Why not ZFC? What is the main differences between the two? What are the difficulties of implementing ZFC if any?
+% todo: add something else about ZFC here like a brief description
+
+Is this a good language to explain mathematics to a computer?
+
+% todo:
+I know the answer is "maybe not" but im not sure why. Also need to investigate it.
+What are the difficulties of implementing ZFC if any?
+
+Why do we choose CIC instead? What is CIC? What are the main differences between the two? 
+
+Lean is a functional programming language and a proof verification assistant. -> based in CIC.
+
+% todo: (maybe this could be a footnote)
+How can it be both those things at once? I dont know and need to investigate it.
+
 
 \subsection{Plan of study}
 
-A brief introduction of what we will see in each chapter.
+The objective of these notes is:
+\begin{itemize}
+  \item That you understand what CIC is.
+  \item That you can begin proving some small theorems in Lean, while understanding why Lean allows you to do this. 
+\end{itemize}
+
+Chapters 2 through 5 will help you achieve the first point. You may see CIC as built by adding things on top of other things:
+
+(schema of how you build CIC by taking lambda calculus, adding types, then adding dependent types, then adding inductive types)
+
+Chapter 6 will focus on the second point. We will learn what the Curry--Howard isomorphism is and how we can start building proofs.

@@ -1,12 +1,119 @@
 \section{The untyped lambda calculus}
 
-Why the lambda calculus? Why is the lambda calculus interesting? A small bit of history. Why did Church come up with this? What was the problem he wanted to solve? Did he solve this problem (we can answer this later)?
+So in the XX century people became very obsessed with formal mathematics. I mean there always have been some sort of inclination to make math more and more rigurous. In the 1920s, it became clear that the attempts that had been made to clarify the foundations of mathematics suffered from paradoxes an inconsistencies (see Russel's paradox). Thus, German mathematician David Hilbert formulated his program, Hilbert program. In his program he essentially was saying: ok we need to provide secure foundations for all mathematics. This means we need to find some formalism such that all mathematics can be written in a precise formal language, and manipulated according to well defined rules, and we need that all mathematical statements can be proven, no contradiction can be obtained and there should be an algorithm to decide the truth or falsity of any mathematical statement.
 
-Constructing terms. What are terms? Why do I want to construct terms? Rules of construction (abstraction and application (which is really just yuxtaposition)).
+This last bit is called the Entscheidungsproblem or decision problem. 
 
-What can we do with lambda calculus?
+Now several people tried to tackle this problem, in particular we can look at Alan Turing and Alonzo Church. Both mathematician started working on separate versions of their solution for this problem.
 
-We can define Church's numerals. Is this interesting for Lean?
+Now both of them thought: ok so before we can solve this problem we need to formalize this problem. How can we define an "algorithm"? An algorithm is a procedure that takes an input and produces an output; i.e. a function. But a function can be theoretical, so how can we define a computable function?
+
+To answer this, Alan Turing came up with his Turing machine model, and he says: ok a computable function is one that can be defined by a Turing machine.
+
+On the other hand Church defines a formal system called the lambda calculus and says: a computable function is one that can be defined by a lambda term.
+
+The lambda calculus is particularly interesting for us because, unlike Turing machines, it is a very simple and expressive formal system. I mean: with very few and simple rules you can construct all computable functions. So this is exactly the type of thing we are interested in if we want a computer to understand mathematics.
+
+Also, it is based purely on functions and their application, which is much closer to the kind of mathematical objects we are already familiar with, and easier to integrate with logical systems.
+
+Moreover, the lambda calculus is not only a model of computation, but it also interacts very naturally with logic. In particular, there is a deep connection between lambda terms and proofs, known as the Curry--Howard correspondence, which allows us to interpret types as propositions and terms as proofs. But more on this later.
+
+\subsection{Constructing terms}
+
+So we are interested in constructing lambda-terms. A lambda terms is simply a computable function or you could think of it as a description of an algorithm.
+
+Lambda-terms are described recursively as follows. First we will assume we have an infinite set of variables $\{x_1, x_2, \dots\}$. Then:
+
+\begin{itemize}
+  \item (Base case) Any variable is a lambda-term.
+  \item (Recursive case) If $x$ is a variable and $t, t'$ are lambda-terms, then
+  \begin{itemize}
+    \item $\pilambda x. t$ is a lambda-term (abstraction)
+    \item $tt'$ is a lambda-term (yuxtaposition or application)
+  \end{itemize}
+\end{itemize}
+
+Now at first sight these do not look like functions at all. Remember we are also interested in giving rules that mathematicians can use to manipulate mathematical objects. We now have our mathematical object, the lambda-terms, and we want to give formal rules on how to manipulate them.
+
+I will now try to convince you that, by defining the following rules, we are defining a behaviour that resembles our intuitive idea of a function. I.e. I want to convince you that you can understand $\lambda x. t$ as an expression $f : x \mapsto t$ that you are more used to.
+
+Let $x$ be a variable and $t, t'$ be two any valid lambda terms.
+
+\begin{highlight}[Exercise]
+Convince yourself that these are valid lambda-terms:
+
+\begin{itemize}
+  \item $\pilambda x. t$
+  \item $(\pilambda x. t) t'$.
+\end{itemize}
+\end{highlight}
+
+First rule: alpha conversion
+
+$$
+\pilambda x. t =_\alpha \pilambda y. t, 
+$$
+
+whenever $y$ is a variable that did not appear in $t$ already.
+
+\begin{highlight}[Important note]
+If $y$ appears in $t$, we could have sometihng like this:
+
+$$\pilambda x. y x =_\alpha \pilambda y. y y$$
+
+which is clearly not the same function.
+\end{highlight}
+
+Now this reflects the idea that the actual name of the parameters in a function
+definition should be irrelevant. I.e. the function $f(x) = x$ is exactly the same function as $f(y) = y$.
+
+Second rule: beta reduction
+
+$$
+(\pilambda x. t)t' =_\beta t[x \mapsto t']
+$$
+
+\begin{highlight}[Definition]
+$
+t[x \mapsto t']
+$
+is defined recursively, but essentially the thing is "take every instance of $x$ in $t$ and substitute it by $t'$. For example:
+
+$$
+(x + y)[x \mapsto 3] = 3 + y
+$$
+
+The formal definition is given by: let $x \neq y$ variables and $e, t,t'$ terms.
+$$
+\begin{array}{rcl}
+  x[x \mapsto e] &=& e\\
+  y[x \mapsto e] &=& y\\
+  (\pilambda z. t)[x \mapsto e] &=& \pilambda z. t[x \mapsto e] \\
+  (tt')[x \mapsto e] &=& t[x \mapsto e]t'[x \mapsto e]
+\end{array}
+$$
+\end{highlight}
+
+This second rule reflects the idea of function aplication. For example a function $f : x \mapsto f(x)$ applied to the number $3$ is the result of changing every instance of the variable $x$ for $3$ in the definition of $f$.
+
+\subsection{Pros}
+
+Now in this section I will convince you that the lambda calculus can be used to construct a number of mathematical objects.
+
+Bools can be described as:
+
+
+Why does that make sense?
+
+Natural numbers can be described as:
+
+
+Why does that make sense?
+
+Even example.
+
+\subsection{Cons}
+
 
 What is the problem with untyped lambda calculus? Why is it not enough, why do we need more?
 
