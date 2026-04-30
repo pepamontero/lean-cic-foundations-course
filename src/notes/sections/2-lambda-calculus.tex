@@ -98,25 +98,77 @@ This second rule reflects the idea of function aplication. For example a functio
 
 \subsection{Pros}
 
-Now in this section I will convince you that the lambda calculus can be used to construct a number of mathematical objects.
+Even with an extremely small syntax and rules for rewriting, we can write rich mathematics. This is great because this is exactly the sort of thing a computer can work with, since we have a very clear idea of what are valid mathematical objects (the lambda terms) and to do computations is simply to rewrite; since everything is a function here, computation comes naturally. This is less true for ZFC, we still have rules but computation is not something primitive, it is simulated. (i should investigate more on this last sentence to at least be able to explain).
+
+Some examples of mathematical objects we can encode as functions using the lambda calculus.
 
 Bools can be described as:
 
+$$
+\begin{array}{c}
+  \operatorname{TRUE} = \pilambda x.\pilambda y. x \\
+  \operatorname{FALSE} = \pilambda x.\pilambda y. Y
+\end{array}
+$$
 
-Why does that make sense?
+The key intuition is that a boolean can be understood as a choice between (any) two alternatives.
+
+From this we can enconde conditionals, i.e. we encode if b then x else y as:
+
+$$
+  \operatorname{COND} = \pilambda b. \pilambda x. \pilambda y. b x y
+$$
+
+Note that conditionals (controw-flow) is a very basic building block of computation.
 
 Natural numbers can be described as:
 
+We understand a natural number as “repeat a function n times”
 
-Why does that make sense?
+Note: in ZFC, natural numbers are sets (von Neumann's naturals). So for example adding two numbers is not really our intuitive idea of actual addition. What is the computation we perform? We are simulating addition.
 
-Even example.
+Even example. Addition example.
 
-\subsection{Cons}
-
-
-What is the problem with untyped lambda calculus? Why is it not enough, why do we need more?
 
 \subsection{Exercises}
 
-Important but I want to add exercises that might be interesting to understand something about Lean and i dont know how that could look like for now.
+Important but I want to add exercises that might be interesting to understand something about Lean and i dont know how that could look like for now. Should I just add exercises on lambda calculus so as to get used to it?
+
+Exercise 1. Are the following well-formed lambda terms?
+
+Exercise 2. Reduce the following expressions
+
+Exercise 3. Define AND and OR for booleans. Notice that this means that we can encode logic in lambda calculus without having it as an extra resource!!
+
+Exercise 4. Define ODD. Define MULTIPLE\_OF\_THREE. on naturals.
+
+Exercise 5. Define multiplication on naturals. 
+
+Exercise 6. Devise an encoding for pairs in the lambda calculus. Provide lambda terms PAIR and the projections FST and SND.
+
+\subsection{Cons}
+
+At this point, it might seem that the lambda calculus gives us exactly what we were looking for: a very small formal system, with simple rules, that is expressive enough to encode a wide range of mathematical objects and computations.
+
+However, this expressiveness comes at a cost. The system is extremely permissive: essentially any syntactic combination of terms is allowed, and there is no notion of whether an expression is “well-formed” beyond the grammar itself.
+
+In particular, this means that we can form terms that do not behave like meaningful functions at all.
+
+example:
+
+$$
+(\pilambda x. xx) (\pilambda x. xx)
+$$
+
+is a well formed term (exercise: convince yourself so). Now try to reduce it. You cannot, every time we try to reduce it, we obtain the same expression again. This is unnaceptable in computation. Remember we're trying to get a computer to understand math. A computer will not realize it has already been here before 23984 times and thus should try a different approach. Thus, we cannot have terms that are infinitely reducible.
+
+Notice that programs don't have to necessarily terminate (you can define partial things with care) but proofs / definitional computation must behave well. At the very least, we need to ensure that the expressions we use to represent mathematical objects behave in a controlled way, and do not lead to meaningless or non-terminating computations.
+
+What is happening here is a form of self-reference: the function is applied to itself, and this leads to an infinite loop. This kind of phenomenon is closely related to classical logical paradoxes.
+
+A famous example is Russell's paradox, which arises when considering the set of all sets that do not contain themselves. Asking whether this set contains itself leads to a contradiction.
+
+Both situations stem from the same underlying issue: allowing unrestricted self-reference leads to pathological behaviour.
+
+For set theory, we simply prohibit self-references and call it a day. However how can we solve this problem? In the next chapter we will find the answer huehue.
+
