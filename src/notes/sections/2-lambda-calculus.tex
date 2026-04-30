@@ -1,4 +1,4 @@
-\section{The untyped lambda calculus}
+\chapter{The untyped lambda calculus}
 
 So in the XX century people became very obsessed with formal mathematics. I mean there always have been some sort of inclination to make math more and more rigurous. In the 1920s, it became clear that the attempts that had been made to clarify the foundations of mathematics suffered from paradoxes an inconsistencies (see Russel's paradox). Thus, German mathematician David Hilbert formulated his program, Hilbert program. In his program he essentially was saying: ok we need to provide secure foundations for all mathematics. This means we need to find some formalism such that all mathematics can be written in a precise formal language, and manipulated according to well defined rules, and we need that all mathematical statements can be proven, no contradiction can be obtained and there should be an algorithm to decide the truth or falsity of any mathematical statement.
 
@@ -18,7 +18,7 @@ Also, it is based purely on functions and their application, which is much close
 
 Moreover, the lambda calculus is not only a model of computation, but it also interacts very naturally with logic. In particular, there is a deep connection between lambda terms and proofs, known as the Curry--Howard correspondence, which allows us to interpret types as propositions and terms as proofs. But more on this later.
 
-\subsection{Constructing terms}
+\section{Constructing terms}
 
 So we are interested in constructing lambda-terms. A lambda terms is simply a computable function or you could think of it as a description of an algorithm.
 
@@ -96,7 +96,7 @@ $$
 
 This second rule reflects the idea of function aplication. For example a function $f : x \mapsto f(x)$ applied to the number $3$ is the result of changing every instance of the variable $x$ for $3$ in the definition of $f$.
 
-\subsection{Pros}
+\section{Pros}
 
 Even with an extremely small syntax and rules for rewriting, we can write rich mathematics. This is great because this is exactly the sort of thing a computer can work with, since we have a very clear idea of what are valid mathematical objects (the lambda terms) and to do computations is simply to rewrite; since everything is a function here, computation comes naturally. This is less true for ZFC, we still have rules but computation is not something primitive, it is simulated. (i should investigate more on this last sentence to at least be able to explain).
 
@@ -130,7 +130,8 @@ Note: in ZFC, natural numbers are sets (von Neumann's naturals). So for example 
 Even example. Addition example.
 
 
-\subsection{Exercises}
+
+\section{Exercises}
 
 Important but I want to add exercises that might be interesting to understand something about Lean and i dont know how that could look like for now. Should I just add exercises on lambda calculus so as to get used to it?
 
@@ -146,7 +147,7 @@ Exercise 5. Define multiplication on naturals.
 
 Exercise 6. Devise an encoding for pairs in the lambda calculus. Provide lambda terms PAIR and the projections FST and SND.
 
-\subsection{Cons}
+\section{Cons}
 
 At this point, it might seem that the lambda calculus gives us exactly what we were looking for: a very small formal system, with simple rules, that is expressive enough to encode a wide range of mathematical objects and computations.
 
