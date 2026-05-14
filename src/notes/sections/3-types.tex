@@ -45,14 +45,21 @@ $$
 
 Of course, our definition of booleans and naturals were also functions, and thus they should have a type of the form $A \to B$ as well (and they do!) but let's not worry about this just now (as we don't yet have the language to precisely describe the types of these terms). For now, consider the following formal definition of types:
 
+Definition (simple type): (simple) types are defined inductively as terms were; we have an infinite set of type variables, which we will denote (for example) $\alpha, \beta, \gamma, \dots$. Then
+\begin{itemize}
+  \item Base case: if $\alpha$ is a type variable then it is a type
+  \item Recursive case: if $\alpha$ and $\beta$ are types then $\alpha \to \beta$ is also a type, called the arrow type.
+\end{itemize}
+
+Examples of simple types: $\alpha$, $\tau_1$, $\tau_1 \to \tau_2$, $(\alpha \to \beta) \to \gamma$, $\alpha \to \beta \to \gamma$.
+
+Note that, as we did with terms, types are associated automatically to the right; so
+$$
+\alpha \to \beta \to \gamma = \alpha \to (\beta \to \gamma) \neq (\alpha \to \beta) \to \gamma
+$$
 
 
 ---
-
-
-How can we differentiate objects of "different kinds"? We introduce the notion of types:
-
-What is a type?
 
 A little bit of history: who did this and why? Are types independent from lambda calculus? Can type theory be described for other terms, not lambda calculus well formed terms?
 
