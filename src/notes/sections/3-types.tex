@@ -1,6 +1,62 @@
 \chapter{The simply-typed lamdba calculus}
 
-What is a type? Why do we care about adding types? What problem does this solve? A little bit of history: who did this and why? Are types independent from lambda calculus? Can type theory be described for other terms, not lambda calculus well formed terms?
+So we don't want to allow self-reference. What do we do?
+Russell enriched set theory with a type system to escape from the paradox, only allowing well-founded sets. Church thinks something similar could eliminate paradoxes from the
+lambda-calculus, forbidding self-application in terms like $\pilambda x. xx$, and keeping the intuition
+that lambda-abstractions denote functions.
+
+If everything is a function, the problem is that we are allowing functions to take as parameters objects of any kind, for example another function.
+
+The idea behind type theory is to classify lambda terms according to how they are meant to behave. We call these classifications \emph{types}, and we say that a term has a certain type and denote it as $t : T$ where $t$ is a term and $T$ is a type.
+
+How can we decide the types of terms? Well remember that what we want to do is write mathematics. Recall the lambda terms that we already constructed in the previous chapter, and what we meant for them to represent
+
+For example:
+
+TRUE and FALSE represent boolean values,
+the Church numerals 0,1,2,… represent natural numbers,
+and terms such as EVEN represent computations on these objects.
+
+Intuitively, these objects should not all behave in the same way. A boolean, a natural number, and a function computing parity play very different computational roles.
+
+In particular, if EVEN is a function that determines whether a natural number is even, then we expect it to:
+
+take a natural number as input,
+and produce a boolean as output.
+
+Thus, we would like to distinguish between terms such as:
+
+TRUE,
+0,
+and EVEN
+
+by assigning them different types.
+
+We would like terms representing naturals to have a type representing natural numbers, for example type Nat:
+$$
+0 : \text{Nat}, \quad 1 : \text{Nat}, \quad \dots
+$$
+and true and false to have a type representing booleans, we can call this Bool.
+
+Then, naturally the type of EVEN would be "something that takes a Nat and returns a Bool". This is written as
+$$
+EVEN : Nat \to Bool
+$$
+
+Of course, our definition of booleans and naturals were also functions, and thus they should have a type of the form $A \to B$ as well (and they do!) but let's not worry about this just now (as we don't yet have the language to precisely describe the types of these terms). For now, consider the following formal definition of types:
+
+
+
+---
+
+
+How can we differentiate objects of "different kinds"? We introduce the notion of types:
+
+What is a type?
+
+A little bit of history: who did this and why? Are types independent from lambda calculus? Can type theory be described for other terms, not lambda calculus well formed terms?
+
+
 
 Type judgements. What are they. Why do we care about doing type judgements? How does this relate to being a "foundation of mathematics"? Difference between CIC and ZFC: we dont care about membership but about type judgements. Type judgements are described via rules (not axioms). What are these rules? Where do these rules come from? What problem do they solve?
 
@@ -11,6 +67,10 @@ Are they enough? Why not? Why are we missing? What can we do with ZFC that we ca
 \section{Type Judgements in Lean}
 
 the check command? should i talk here about the elaborator??
+
+Essentially the elaborator is the compiler of Lean. 
+
+Here we  would write a 
 
 \section{Exercises}
 
